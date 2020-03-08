@@ -86,7 +86,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv)
     try
     {
       reinterpret_cast<test_f>(test_fptr)(debug);
-      std::cout << (debug.str().empty() ? POS0 : debug.str())
+      std::cout << (debug.str().empty() ? POS0 : debug.str()+"\n")
                 << G(" ✔ ") << namestr << std::endl;
     }
     catch(TestFailedException e)
