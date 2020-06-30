@@ -32,7 +32,7 @@
        throw TestFailedException(__FILE__, __LINE__,\
                                  "Assertion failed, exception was not thrown", \
                                  STR(expr));} \
-  catch(exc e) {}
+  catch(const exc& e) {}
 
 typedef void (*test_f)(std::stringstream& debug);
 
@@ -89,7 +89,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv)
       std::cout << (debug.str().empty() ? POS0 : debug.str()+"\n")
                 << G(" ✔ ") << namestr << std::endl;
     }
-    catch(TestFailedException e)
+    catch(const TestFailedException& e)
     {
       errmsg = std::string(" (") + e.what() + ")";
     }
