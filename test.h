@@ -17,30 +17,27 @@
     {_test_##name(debug);}\
   void _test_##name(__attribute__((unused)) std::stringstream& debug)
 
-#define STR(s) STR_(#s)
-#define STR_(s) s
-
 #define ASSERT(expr)\
   if(!(expr)){throw TestFailedException(__FILE__, __LINE__, "Assertion failed",\
-                                        STR(expr));}
+                                        #expr);}
 #define ASSERT_FALSE(expr) \
   if((expr)){throw TestFailedException(__FILE__, __LINE__, "Assertion failed",\
-                                       STR(expr));}
+                                       #expr);}
 
 #define ASSERT_THROW(expr, exc) \
   try {expr; \
        throw TestFailedException(__FILE__, __LINE__,\
                                  "Assertion failed, exception was not thrown", \
-                                 STR(expr));} \
+                                 #expr);} \
   catch(const exc& e) {}
 
 typedef void (*test_f)(std::stringstream& debug);
 
 const char* currentExceptionName()
 {
-    int status;
-    return abi::__cxa_demangle(abi::__cxa_current_exception_type()->name(),
-                               0, 0, &status);
+  int status;
+  return abi::__cxa_demangle(abi::__cxa_current_exception_type()->name(),
+                             0, 0, &status);
 }
 
 class TestFailedException: public std::exception
