@@ -17,7 +17,7 @@ TEST(failures)
   subprocess::popen cmd("./failing_tests", {});
   string line;
 
-  while (std::getline(cmd.stdout(), line))
+  while(std::getline(cmd.stdout(), line))
   {
     ASSERT(line.find("🡆") != std::string::npos);
     std::getline(cmd.stdout(), line);
@@ -33,7 +33,7 @@ TEST(passing)
   subprocess::popen cmd("./passing_tests", {});
   string line;
 
-  while (std::getline(cmd.stdout(), line))
+  while(std::getline(cmd.stdout(), line))
   {
     ASSERT(line.find("🡆") != std::string::npos);
     std::getline(cmd.stdout(), line);
